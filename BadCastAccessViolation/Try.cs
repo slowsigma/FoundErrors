@@ -9,10 +9,10 @@ namespace Nysa.Logics
     {
         public static explicit operator Try<T>(Func<T> value) => (Pending<T>)value;
 
-        // This should be an invalid cast but is not. Visual studio says the cast is redundant.
+        // VS calls this cast redundant, but there is no defined operator (explicit or implicit).
         //public static implicit operator Try<T>(Suspect<T> value) => (Resolved<T>)value;
-
-        // When we take the suggestion and remove "redundant" cast, leads un-catchable access violation
+        // So, if we indulge Visual Studio and take the suggestion to remove the "redundant" cast,
+        // this statement leads un-catchable access violation
         public static implicit operator Try<T>(Suspect<T> value) => value;
 
         public abstract Suspect<T> Run();
